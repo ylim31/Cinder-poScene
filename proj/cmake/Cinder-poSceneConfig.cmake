@@ -1,23 +1,23 @@
-if(NOT TARGET poScene)
+if(NOT TARGET Cinder-poScene)
     # Define ${Cinder-Notifications_PROJECT_ROOT}. ${CMAKE_CURRENT_LIST_DIR} is just the current directory.
-    get_filename_component(poScene_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
+    get_filename_component(Cinder-poScene_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
 
     # Define ${CINDER_PATH} as usual.
-    get_filename_component(CINDER_PATH "${poScene_PROJECT_ROOT}/../.." ABSOLUTE)
+    get_filename_component(CINDER_PATH "${Cinder-poScene_PROJECT_ROOT}/../.." ABSOLUTE)
 
     # Make a list of source files and define that to be ${SOURCE_LIST}.
     file(GLOB SOURCE_LIST CONFIGURE_DEPENDS
-            "${poScene_PROJECT_ROOT}/src/poScene/*.cpp"
+            "${Cinder-poScene_PROJECT_ROOT}/src/poScene/*.cpp"
             )
 
     # Create the library!
-    add_library(poScene ${SOURCE_LIST})
+    add_library(Cinder-poScene ${SOURCE_LIST})
 
     # Add include directories.
     # Notice that `cinderblock.xml` has `<includePath>src</includePath>`.
     # So you need to set `../../src/` to include.
-    target_include_directories(poScene PUBLIC "${poScene_PROJECT_ROOT}/src" )
-    target_include_directories(poScene SYSTEM BEFORE PUBLIC "${CINDER_PATH}/include" )
+    target_include_directories(Cinder-poScene PUBLIC "${Cinder-poScene_PROJECT_ROOT}/src" )
+    target_include_directories(Cinder-poScene SYSTEM BEFORE PUBLIC "${CINDER_PATH}/include" )
 
 
     # If your Cinder block has no source code but instead pre-build libraries,
@@ -31,6 +31,6 @@ if(NOT TARGET poScene)
                 "${CINDER_PATH}/${CINDER_LIB_DIRECTORY}"
                 "$ENV{CINDER_PATH}/${CINDER_LIB_DIRECTORY}")
     endif()
-    target_link_libraries(poScene PRIVATE cinder)
+    target_link_libraries(Cinder-poScene PRIVATE cinder)
 
 endif()
